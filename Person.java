@@ -1,11 +1,10 @@
-public class Person {
+public class Person implements Nameable {
     int id;
     String name="unknown";
     int age;
-    private boolean parent_Permission=true;
+    boolean parent_Permission=true;
 
-    public Person(int id, String name, int age, boolean parent_Permission) {
-        this.id = id;
+    public Person(String name, int age, boolean parent_Permission) {
         this.name = name;
         this.age = age;
         this.parent_Permission = parent_Permission;
@@ -36,6 +35,11 @@ public class Person {
     }
 
     public boolean canUseServices() {
-        return isOfAge() && parent_Permission;
+        return isOfAge() || parent_Permission;
+    }
+
+    @Override
+    public String correctName() {
+        return name;
     }
 }
