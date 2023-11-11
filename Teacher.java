@@ -1,5 +1,5 @@
 class Teacher extends Person {
-    private String specialization;
+     String specialization;
     public String getSpecialization() {
         return specialization;
     }
@@ -10,8 +10,8 @@ class Teacher extends Person {
 
 
 
-    public Teacher(int id, String name, int age,boolean parent_Permission, String specialization) {
-        super(id, name, age,parent_Permission);
+    public Teacher(String name, int age,boolean parent_Permission, String specialization) {
+        super(name, age,parent_Permission);
         this.specialization = specialization;
     }
 

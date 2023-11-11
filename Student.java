@@ -11,7 +11,7 @@ class Student extends Person {
 
 
     public Student(int id, String name, int age,boolean parent_Permission,String classroom) {
-        super(id, name,age,parent_Permission);
+        super(name,age,parent_Permission);
         this.classroom = classroom;
     }
 }

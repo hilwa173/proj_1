@@ -1,4 +1,4 @@
-public class Person {
+public class Person implements Nameable {
     int id;
     String name="unknown";
     int age;
@@ -36,5 +36,12 @@ public class Person {
 
     public boolean canUseServices() {
         return isOfAge() || parent_Permission;
+    }
+
+    @Override
+    public String correctName() {
+        return name;
+
+
     }
 }
