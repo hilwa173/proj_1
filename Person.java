@@ -44,4 +44,33 @@ public class Person implements Nameable {
 
 
     }
+
+        private Rental[] rentals;
+
+        public Rental[] getRentals() {
+            return rentals;
+        }
+
+        public void setRentals(Rental[] rentals) {
+            this.rentals = rentals;
+        }
+
+        public int getRentalCount() {
+            return rentalCount;
+        }
+
+        public void setRentalCount(int rentalCount) {
+            this.rentalCount = rentalCount;
+        }
+
+        private int rentalCount;
+
+        public void addRental(Rental rental){
+
+        }
+
+        // other methods...
+    }
+
 }
+
