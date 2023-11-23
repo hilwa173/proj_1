@@ -41,7 +41,10 @@ public class Person implements Nameable {
     @Override
     public String correctName() {
         return name;
+
+
     }
+
         private Rental[] rentals;
 
         public Rental[] getRentals() {
@@ -68,3 +71,6 @@ public class Person implements Nameable {
 
         // other methods...
     }
+
+}
+
