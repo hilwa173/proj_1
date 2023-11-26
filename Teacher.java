@@ -1,5 +1,5 @@
 class Teacher extends Person {
-     String specialization;
+    private String specialization;
     public String getSpecialization() {
         return specialization;
     }

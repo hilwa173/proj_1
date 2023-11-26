@@ -14,62 +14,7 @@ public class App {
         rentals = new ArrayList<>();
     }
 
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            displayMenu();
-            int choice = scanner.nextInt();
-            handleChoice(choice);
-        }
-    }
-
-    public void displayMenu() {
-        System.out.println("***********************************************");
-        System.out.println("Welcome to School Library App!");
-        System.out.println("Please select an option by entering a number:");
-        System.out.println("1 - List all books");
-        System.out.println("2 - List all people");
-        System.out.println("3 - Create a person");
-        System.out.println("4 - Create a book");
-        System.out.println("5 - Create a rental");
-        System.out.println("6 - List all rental for a given person id");
-        System.out.println("7 - Exit");
-        System.out.println("***********************************************");
-    }
-
-    public void handleChoice(int choice) {
-        switch (choice) {
-            case 1:
-                listBooks();
-                break;
-            case 2:
-                listPeople();
-                break;
-            case 3:
-                createPerson();
-                break;
-            case 4:
-                createBook();
-                break;
-            case 5:
-                createRental();
-                break;
-            case 6:
-                listRentals();
-                break;
-            case 7:
-                exitProgram();
-                break;
-            default:
-                System.out.println("Please select a valid option");
-        }
-    }
-
-    public void exitProgram() {
-        System.out.println("Thanks for using the School Library App!");
-        System.exit(0);
-    }
 
     public void listBooks() {
         if (books.isEmpty()) {
