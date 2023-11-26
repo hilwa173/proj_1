@@ -1,7 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
 public class Classroom {
     private String label;
-    private Student[] students;
-    private int studentCount;
+    private List<Student> students;
+
+    public Classroom(String label) {
+        this.label = label;
+        this.students = new ArrayList<>();
+    }
 
     public String getLabel() {
         return label;
@@ -11,30 +17,14 @@ public class Classroom {
         this.label = label;
     }
 
-    public Student[] getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Student[] students) {
-        this.students = students;
-    }
-
-    public void setStudentCount(int studentCount) {
-        this.studentCount = studentCount;
-    }
-
-    public Classroom(String label, int capacity) {
-        this.label = label;
-        this.students = new Student[capacity];
-        this.studentCount = 0;
-    }
-
-    // other methods...
-
-    public int getStudentCount() {
-        return studentCount;
-    }
-
-    public void addStudent(Student student1) {
+    public void addStudent(Student student) {
+        student.setClassroom(String.valueOf(this));
+        students.add(student);
     }
 }
+
+

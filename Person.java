@@ -1,15 +1,33 @@
+import java.util.ArrayList;
+import java.util.Date;
 public class Person implements Nameable {
-    int id;
-    String name="unknown";
-    int age;
-    boolean parent_Permission=true;
+    // Fields
+    private int id;
+    private String name;
+    private int age;
+    private boolean parentPermission;
+    private ArrayList<Rental> rentals;
 
-    public Person(String name, int age, boolean parent_Permission) {
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
-        this.parent_Permission = parent_Permission;
     }
 
+    // Constructor
+    public Person(int id,String name,int age, boolean parentPermission) {
+        super();
+        this.id=id;
+        this.name = name;
+        this.age = age;
+        this.parentPermission = parentPermission;
+        this.rentals = new ArrayList<>();
+    }
+
+    public Person(int age) {
+        this(01,"unkown",12,true);
+    }
+
+    // Getters and setters
     public int getId() {
         return id;
     }
@@ -18,53 +36,38 @@ public class Person implements Nameable {
         return name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAge() {
+        return age;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
 
-    private boolean isOfAge() {
+    // Methods
+    private boolean ofAge() {
         return age >= 18;
     }
 
-    public boolean canUseServices() {
-        return isOfAge() || parent_Permission;
-    }
-
-    @Override
     public String correctName() {
         return name;
     }
-        private Rental[] rentals;
 
-        public Rental[] getRentals() {
-            return rentals;
-        }
-
-        public void setRentals(Rental[] rentals) {
-            this.rentals = rentals;
-        }
-
-        public int getRentalCount() {
-            return rentalCount;
-        }
-
-        public void setRentalCount(int rentalCount) {
-            this.rentalCount = rentalCount;
-        }
-
-        private int rentalCount;
-
-        public void addRental(Rental rental){
-
-        }
-
-        // other methods...
+    public boolean canUseServices() {
+        return ofAge() || parentPermission;
     }
+
+    public Rental addRental(Date date,Book book) {
+        Rental rental = new Rental(date,this,book);
+        rentals.add(rental);
+        return rental;
+    }
+
+    public ArrayList<Rental> getRentals() {
+        return rentals;
+    }
+}

@@ -10,10 +10,11 @@ class Teacher extends Person {
 
 
 
-    public Teacher(String name, int age,boolean parent_Permission, String specialization) {
-        super(name, age,parent_Permission);
+    public Teacher(String name, int age, String specialization) {
+        super(name,age);
         this.specialization = specialization;
     }
+
 
     @Override
     public boolean canUseServices() {
