@@ -55,7 +55,20 @@ public class Person implements Nameable {
 
     public String correctName() {
         return name;
+
+
     }
+
+
+        private Rental[] rentals;
+
+        public Rental[] getRentals() {
+            return rentals;
+        }
+
+        public void setRentals(Rental[] rentals) {
+            this.rentals = rentals;
+        }
 
     public boolean canUseServices() {
         return ofAge() || parentPermission;
@@ -70,4 +83,4 @@ public class Person implements Nameable {
     public ArrayList<Rental> getRentals() {
         return rentals;
     }
-}
+
