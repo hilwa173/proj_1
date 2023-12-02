@@ -49,6 +49,6 @@ public class Book {
                 rentals.add(rental);
                 return rental;
         }
-
-
 }
+
+

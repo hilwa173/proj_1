@@ -10,3 +10,8 @@ public class BaseDecor implements Nameable {
         return nameable.correctName();
     }
 }
+
+
+
+
+

@@ -8,9 +8,11 @@ public class Person implements Nameable {
     private boolean parentPermission;
     private ArrayList<Rental> rentals;
 
-    public Person(String name, int age) {
+    public Person(int id,String name, int age) {
+        this.id=id;
         this.name = name;
         this.age = age;
+
     }
 
     // Constructor
@@ -71,3 +73,5 @@ public class Person implements Nameable {
         return rentals;
     }
 }
+
+

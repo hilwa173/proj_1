@@ -7,12 +7,10 @@ public class Rental {
 
     public Rental(Date date, Person person, Book book) {
         this.date = date;
-
         this.person = person;
         if (!person.getRentals().contains(this)) {
             person.getRentals().add(this);
         }
-
         this.book = book;
         if (!book.getRentals().contains(this)) {
             book.getRentals().add(this);
@@ -46,3 +44,5 @@ public class Rental {
         this.book = book;
     }
 }
+
+
