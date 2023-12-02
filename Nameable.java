@@ -1,4 +1,4 @@
-public interface Nameable {
-    String correctName();
-}
 
+public interface Nameable {
+    String getCorrectName();
+}

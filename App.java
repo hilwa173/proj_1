@@ -1,93 +1,53 @@
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
-
+import java.util.Date;
 public class App {
-     ArrayList<Person> people;
-    ArrayList<Book> books;
-     ArrayList<Rental> rentals;
+    static List<Book> books = new ArrayList<>();
+    static List<Person> people = new ArrayList<>();
+    static List<Rental> rentals = new ArrayList<>();
+    // List<Classroom> students= new ArrayList<>();
+    private static Date date;
 
-    public App() {
-        people = new ArrayList<>();
-        books = new ArrayList<>();
-        rentals = new ArrayList<>();
-    }
-Main main=new Main();
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            main.displayMenu();
-            int choice = scanner.nextInt();
-            handleChoice(choice);
-        }
-    }
-
-    public void handleChoice(int choice) {
-        switch (choice) {
-            case 1:
-                listBooks();
-                break;
-            case 2:
-                listPeople();
-                break;
-            case 3:
-                createPerson();
-                break;
-            case 4:
-                createBook();
-                break;
-            case 5:
-                createRental();
-                break;
-            case 6:
-                listRentals();
-                break;
-            case 7:
-                exitProgram();
-                break;
-            default:
-                System.out.println("Please select a valid option");
-        }
-    }
-
-    public void exitProgram() {
-        System.out.println("Thanks for using the School Library App!");
-        System.exit(0);
-    }
-
-    public void listBooks() {
+    void listAllBooks() {
+        //Main.appendOutputText(books.toString());
         if (books.isEmpty()) {
             System.out.println("No books available");
         } else {
-            System.out.println("Books:");
+            System.out.println("List of books:");
             for (Book book : books) {
-                System.out.println(book.getTitle() + " by " + book.getAuthor() + " with id " + book.getId());
+                System.out.println("Title: " + book.getTitle() + ", Author: " + book.getAuthor());
             }
         }
     }
 
-    public void listPeople() {
-
+    void listAllPeople() {
+        // Main.appendOutputText(people.toString());
         if (people.isEmpty()) {
             System.out.println("No people available");
         } else {
-            System.out.println("People:");
+            System.out.println("List of People:");
             for (Person person : people) {
-                System.out.println(person.getName() + " age: " + person.getAge()
-                        + " (" + person.getClass().getSimpleName() + ") with id " + person.getId());
+                System.out.println(person.getCorrectName() + " age: " + person.getAge()
+                        + " (" + person.getClass().getSimpleName() + ") with id " + person.getid());
             }
         }
     }
+
+
+
+
+
+
+
+
     public void createPerson() {
         System.out.println("Create a person:");
         System.out.println("1. Student");
         System.out.println("2. Teacher");
-
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-
         switch (choice) {
             case 1:
                 createStudent();
@@ -99,15 +59,12 @@ Main main=new Main();
                 System.out.println("Invalid choice");
         }
     }
-
     public void createStudent() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Enter student name:");
         String name = scanner.nextLine();
         System.out.println("Enter student age:");
         int age = scanner.nextInt();
-//new
         scanner.nextLine();
         System.out.println("enter ID of students");
         int id=scanner.nextInt();
@@ -117,11 +74,10 @@ Main main=new Main();
         System.out.println("enter students class");
         String classroom=scanner.nextLine();
         Student student = new Student(id,name,age,classroom,parentPermission.equals("Y"));
-
-        System.out.println("Created student " + student.getName() + " with id " + student.getId());
+        System.out.println("Created student " + student.getName()
+                + " with id " + student.getid()+ student.getClassroom());
         people.add(student);
     }
-
     public void createTeacher() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("enter teacher ID");
@@ -131,109 +87,99 @@ Main main=new Main();
         String name = scanner.nextLine();
         System.out.println("Enter teacher age:");
         int age = scanner.nextInt();
-
         System.out.println("Enter teacher specialization:");
-        scanner.nextLine(); // Consume the newline character
+        scanner.nextLine();
         String specialization = scanner.nextLine();
-
         Teacher teacher = new Teacher(id,name,age, specialization);
-
-        System.out.println("Created teacher " + teacher.getName() + " with id " + teacher.getId());
+        System.out.println("Created teacher " + teacher.getName() + " with id " + teacher.getid());
         people.add(teacher);
     }
-
-    public void createBook() {
+    void createBook() {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter book title:");
+        System.out.print("Enter title: ");
         String title = scanner.nextLine();
-
-        System.out.println("Enter book author:");
+        scanner.nextLine();
+        System.out.print("Enter author: ");
         String author = scanner.nextLine();
-
+        scanner.nextLine();
         Book book = new Book(title, author);
-
-        System.out.println("Created book " + book.getTitle() + " by " + book.getAuthor() + " with id " + book.getId());
         books.add(book);
+        System.out.println("Book created successfully.");
     }
 
-    public void createRental() {
-        listPeople();
-        System.out.println("Enter person id:");
+    public static void createRental() {
+       // Main.appendOutputText(books.toString());
         Scanner scanner = new Scanner(System.in);
-        int personId = scanner.nextInt();
 
-        listBooks();
-        System.out.println("Enter book id:");
-        int bookId = scanner.nextInt();
+        System.out.print("Enter person ID: ");
+        int personId = scanner.nextInt();
+        scanner.nextLine();
 
         Person person = findPersonById(personId);
-        Book book = findBookById(bookId);
 
         if (person == null) {
-            System.out.println("Person with id " + personId + " not found");
-        } else if (book == null) {
-            System.out.println("Book with id " + bookId + " not found");
-        } else {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date currentDate=null;
-            Rental rental = new Rental(currentDate, person, book);
+            System.out.println("Person not found.");
+            return;
+        }
 
-            System.out.println("Created rental " + rental.getPerson().getName() + " - "
-                    + rental.getBook().getTitle() + " - date: " + rental.getDate());
+        System.out.print("Enter book title: ");
+        String title = scanner.nextLine();
+        Book book = findBookByTitle(title);
+        if (book == null) {
+            System.out.println("Book not found.");
+            return;
+        }
+        else{
+
+            System.out.printf("Enter The Date: ");
+            String d= scanner.nextLine();
+            Rental rental = new Rental(d,book,person);
+
             rentals.add(rental);
+            System.out.println("Rental created successfully.");
         }
     }
 
-    public void listRentals() {
-        listPeople();
-        System.out.println("Enter person id:");
+
+
+
+
+
+
+
+    void listRentalsByPersonId(int personId) {
+       // Main.appendOutputText(rentals.toString());
         Scanner scanner = new Scanner(System.in);
-        int personId = scanner.nextInt();
-
         Person person = findPersonById(personId);
-
-        if (person != null) {
-            System.out.println("Rentals for " + person.getName() + ":");
-            ArrayList<Rental> personRentals = findRentalsByPerson(person);
-            if (personRentals.isEmpty()) {
-                System.out.println("No rentals found");
-            } else {
-                for (Rental rental : personRentals) {
-                    System.out.println(rental.getBook().getTitle() + " by " + rental.getBook().getAuthor() + " on " + rental.getDate());
-                }
+        if (person == null) {
+            System.out.println("Person not found.");
+            return;
+        }
+        System.out.println("Rentals for " + person.getName() + " (ID: " + person.getid() + "):");
+        boolean rentalsFound = false;
+        for (Rental rental : rentals) {
+            if (rental.getPerson().getid() == personId) {
+                System.out.println("(book "+  rental.getBook().getTitle()+ " author by "+ rental.getBook().getAuthor());
+                System.out.println("Date:"+rental.getDate());
+                rentalsFound = true;
             }
-        } else {
-            System.out.println("Person with id " + personId + " not found");
         }
     }
-
-    private Person findPersonById(int id) {
+    public static Person findPersonById(int personId) {
         for (Person person : people) {
-            if (person.getId() == id) {
+            if (person.getid() == personId) {
                 return person;
             }
         }
         return null;
     }
-    private Book findBookById(int id) {
+    public static Book findBookByTitle(String title) {
         for (Book book : books) {
-            if (book.getId() == id) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
                 return book;
             }
         }
         return null;
     }
-
-    private ArrayList<Rental> findRentalsByPerson(Person person) {
-        ArrayList<Rental> personRentals = new ArrayList<>();
-        for (Rental rental : rentals) {
-            if (rental.getPerson().equals(person)) {
-                personRentals.add(rental);
-            }
-        }
-        return personRentals;
-    }
-
-
 }
+
